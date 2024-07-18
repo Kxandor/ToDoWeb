@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-
+import SideBar from "./Components/SideBar/SideBar";
+import TaskCreateHeader from "./Components/TaskCreateHeader";
+import { Suspense } from "react";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -16,7 +18,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={`${inter.className}bg-white`}>
+        <div className="flex bg-gray-100">
+          <Suspense>
+            <SideBar />
+          </Suspense>
+
+          <main className="flex-1 p-4 ">
+            <TaskCreateHeader />
+            {children}
+          </main>
+        </div>
+      </body>
     </html>
   );
 }
