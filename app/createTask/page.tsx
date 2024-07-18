@@ -39,29 +39,34 @@ const CreateTaskForm = (props: Props) => {
   };
 
   return (
-    <div className="pt-8 ">
-      <div className="text-2xl font-bold text-blue-500 pb-4">
+    <div className="pl-12  pt-12">
+      <div className="text-4xl font-bold text-blue-500 pb-4">
         Create new task
       </div>
-      <div className="">
+      <div className="flex bg-white max-w-[400px]">
         <form
           onSubmit={(e) => {
             handleSubmit(e);
           }}
-          className="flex   gap-4 justify-between"
+          className=""
         >
           <div className="">
-            <div>
-              <label>
-                task name
-                <input
-                  type="text"
-                  value={label}
-                  onChange={(e) => {
-                    setLabel(e.target.value);
-                  }}
-                />
-              </label>
+            <div className="pb-4">
+              <div className=" flex-col">
+                <div className="flex justify-center">
+                  <label className="">task name</label>
+                </div>
+                <div>
+                  <input
+                    type="text"
+                    className="border-black border-2"
+                    value={label}
+                    onChange={(e) => {
+                      setLabel(e.target.value);
+                    }}
+                  />
+                </div>
+              </div>
             </div>
             <div>
               <label>
@@ -69,6 +74,7 @@ const CreateTaskForm = (props: Props) => {
                 <input
                   type="text"
                   value={underLabel}
+                  className="border-black border-2"
                   onChange={(e) => {
                     setUnderLabel(e.target.value);
                   }}
@@ -82,6 +88,7 @@ const CreateTaskForm = (props: Props) => {
                 tag
                 <input
                   type="text"
+                  className="border-black border-2"
                   value={tag}
                   onChange={(e) => {
                     setTag(e.target.value);
@@ -94,13 +101,16 @@ const CreateTaskForm = (props: Props) => {
                 location
                 <input
                   type="text"
+                  className="border-black border-2"
                   value={location}
                   onChange={(e) => {
                     setLocation(e.target.value);
                   }}
                 />
               </label>
-              <input type="submit" onSubmit={(e) => handleSubmit(e)} />
+              <div>
+                <input type="submit" onSubmit={(e) => handleSubmit(e)} />
+              </div>
             </div>
           </div>
         </form>

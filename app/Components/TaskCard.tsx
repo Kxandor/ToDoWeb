@@ -1,5 +1,5 @@
 "use client";
-import React, { useReducer } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import { IoBag } from "react-icons/io5";
 import { task } from "../types";
 import { deleteTask } from "../apis/deleteTask";
@@ -8,14 +8,18 @@ import { updateDatabase } from "../apis/updateDatabase";
 import { useRouter } from "next/navigation";
 interface TaskCardProps {
   task: task;
+  setTasks: Dispatch<SetStateAction<boolean>> | any;
+  tasks?: any;
 }
 
-const TaskCard = ({ task }: TaskCardProps) => {
-  const [ignored, forceUpdate] = useReducer((x) => x + 1, 0);
+const TaskCard = ({ task, tasks, setTasks }: TaskCardProps) => {
+  const [filteredTasks, setFilderedTasks] = useState<any>([]);
   const router = useRouter();
-  const deleteTask = async (id: number) => {
-    fetch(`https://66982bc302f3150fb67042ee.mockapi.io/taskApi/tasks/${id}`, {
-      method: "DELETE",
+  const markTaskComplete = async (id: number) => {
+    fetch(`https://66982bc302f3150fb67042ee.mockapi.io/tasks/${id}`, {
+      method: "PUT", // or PATCH
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ completed: true }),
     })
       .then((res) => {
         if (res.ok) {
@@ -23,13 +27,15 @@ const TaskCard = ({ task }: TaskCardProps) => {
         }
         // handle error
       })
-      .then((task) => {
-        // Do something with deleted task
+      .then((apiTask) => {
+        // Do something with updated task
+        const updatedTask = apiTask;
+        tasks.push(updatedTask);
+        setTasks(tasks);
       })
       .catch((error) => {
         // handle error
       });
-    forceUpdate();
   };
 
   if (task.editing) {
@@ -60,7 +66,7 @@ const TaskCard = ({ task }: TaskCardProps) => {
           <div>
             <button
               onClick={() => {
-                deleteTask(task.id);
+                deleteTask(task.id, setTasks, tasks);
               }}
             >
               Delete
@@ -102,7 +108,7 @@ const TaskCard = ({ task }: TaskCardProps) => {
           <div>
             <button
               onClick={() => {
-                deleteTask(task.id);
+                deleteTask(task.id, setTasks, tasks);
               }}
             >
               Delete
@@ -114,7 +120,7 @@ const TaskCard = ({ task }: TaskCardProps) => {
                 markTaskComplete(task.id);
               }}
             >
-              Completed
+              Complete
             </button>
           </div>
         </div>

@@ -1,4 +1,4 @@
-export const deleteTask = async (id: number) => {
+export const deleteTask = async (id: number, fun: any, tasks: object[]) => {
   fetch(`https://66982bc302f3150fb67042ee.mockapi.io/taskApi/tasks/${id}`, {
     method: "DELETE",
   })
@@ -6,12 +6,10 @@ export const deleteTask = async (id: number) => {
       if (res.ok) {
         return res.json();
       }
-      // handle error
     })
-    .then((task) => {
-      // Do something with deleted task
+    .then((apiTask) => {
+      const newList = tasks.filter((task: any) => task.id != apiTask.id);
+      fun(newList);
     })
-    .catch((error) => {
-      // handle error
-    });
+    .catch((error) => {});
 };

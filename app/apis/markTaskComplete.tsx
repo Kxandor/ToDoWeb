@@ -12,6 +12,7 @@ export const markTaskComplete = async (id: number) => {
     })
     .then((task) => {
       // Do something with updated task
+      console.log(task);
     })
     .catch((error) => {
       // handle error

@@ -58,7 +58,12 @@ const AllTasks = (props: Props) => {
         <div className="flex-grow py-4">
           <div className="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-6 gap-4">
             {tasks?.map((task: any) => (
-              <TaskCard key={task.id} task={task} />
+              <TaskCard
+                key={task.id}
+                task={task}
+                setTasks={setTasks}
+                tasks={tasks}
+              />
             ))}
           </div>
         </div>
