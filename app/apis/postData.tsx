@@ -8,15 +8,15 @@ export const postData = async (data: any) => {
         body: JSON.stringify(data),
       }
     );
-
     if (res.ok) {
-      console.log("Data was sent successfully");
-      const task = await res.json();
-      console.log(task);
+      console.log("Data were sent successfully");
+      return res.json();
     } else {
       console.error("Failed to send data");
+      throw new Error("Failed to send data");
     }
   } catch (error) {
     console.error("An error occurred while sending data", error);
+    throw error;
   }
 };

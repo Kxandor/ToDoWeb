@@ -6,6 +6,8 @@ export type task = {
   taskName: string;
   taskDescription: string;
   location: string;
+  completed: boolean;
+  editing: boolean;
 };
 export type getData = {
   id: number;

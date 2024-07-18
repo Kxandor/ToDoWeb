@@ -18,18 +18,38 @@ const SideBar = () => {
       <div className="space-y-4 mt-2">
         <div
           className="flex items-center space-x-2 cursor-pointer"
-          onClick={() => router.push("/tasks")}
+          onClick={() => router.push("/")}
         >
           <span>All tasks</span>
         </div>
         <div className="flex items-center space-x-2 cursor-pointer">
           <span>Today tasks</span>
         </div>
-        <div className="flex items-center space-x-2 cursor-pointer">
+        <div
+          className="flex items-center space-x-2 cursor-pointer"
+          onClick={() => router.push("/notDoneTasks")}
+        >
           <span>Not done tasks</span>
         </div>
-        <div className="flex items-center space-x-2 cursor-pointer">
+        <div
+          className="flex items-center space-x-2 cursor-pointer"
+          onClick={() => router.push("/doneTasks")}
+        >
           <span>Done tasks</span>
+        </div>
+      </div>
+      <div className="space-y-4   ">
+        <div className="flex items-center space-x-2 cursor-pointer">
+          <span className="text-lg font-semibold pt-8">Actions</span>
+        </div>
+        <div className="flex items-center space-x-2 cursor-pointer">
+          <span onClick={() => router.push("/createTask")}>Create task</span>
+        </div>
+        <div className="flex items-center space-x-2 cursor-pointer">
+          <span>Delete task</span>
+        </div>
+        <div className="flex items-center space-x-2 cursor-pointer">
+          <span>Adit task</span>
         </div>
       </div>
       <div className="pt-8">

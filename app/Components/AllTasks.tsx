@@ -3,18 +3,22 @@ import { useState, useEffect } from "react";
 import TaskCard from "./TaskCard";
 import { getData } from "../apis/getData";
 import { task } from "../types";
-import Button from "./Button";
-import CreateTaskForm from "./CreateTaskForm";
-interface Props {
-  fetchTrigger: boolean;
-  setFetchTrigger: React.Dispatch<React.SetStateAction<boolean>>;
-}
 
-const AllTasks = ({ fetchTrigger, setFetchTrigger }: Props) => {
+interface Props {}
+
+type getData = {
+  id: number;
+  createdAt: string;
+  tag: string;
+  priority: boolean;
+  taskName: string;
+  taskDescription: string;
+  location: string;
+};
+
+const AllTasks = (props: Props) => {
   const [tasks, setTasks] = useState<any>([]);
-  const [isFormOpen, setIsFormOpen] = useState<boolean>(false);
-  const [buttonStyle, setButtonStyle] = useState<string>("");
-  const [count, setCount] = useState<number>(0);
+  const [render, setRender] = useState(false);
 
   const fetchNewData = async () => {
     const response = await fetch(
@@ -31,7 +35,6 @@ const AllTasks = ({ fetchTrigger, setFetchTrigger }: Props) => {
       })
       .then((tasks) => {
         setTasks(tasks);
-        console.log(Object.keys(tasks).length);
       })
       .catch((error) => {
         console.log();
@@ -40,10 +43,9 @@ const AllTasks = ({ fetchTrigger, setFetchTrigger }: Props) => {
 
   useEffect(() => {
     fetchNewData();
-  }, [fetchTrigger]);
+  }, [render]);
   return (
-    <div className="">
-      <div className="mb-12"></div>
+    <div className="mt-12">
       <div>
         <div>
           <h1
