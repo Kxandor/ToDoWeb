@@ -1,6 +1,7 @@
+import TaskCard from "../Components/TaskCard";
 export const markTaskComplete = async (id: number) => {
   fetch(`https://66982bc302f3150fb67042ee.mockapi.io/tasks/${id}`, {
-    method: "PUT", // or PATCH
+    method: "PUT",
     headers: { "content-type": "application/json" },
     body: JSON.stringify({ completed: true }),
   })
@@ -8,13 +9,9 @@ export const markTaskComplete = async (id: number) => {
       if (res.ok) {
         return res.json();
       }
-      // handle error
     })
-    .then((task) => {
-      // Do something with updated task
-      console.log(task);
+    .then((apiTask) => {
+      return <TaskCard task={apiTask} />;
     })
-    .catch((error) => {
-      // handle error
-    });
+    .catch((error) => {});
 };

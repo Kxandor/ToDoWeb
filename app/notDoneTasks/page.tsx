@@ -11,11 +11,10 @@ const Page = (props: Props) => {
 
   useEffect(() => {
     const getTasks = async () => {
-      const data = await getData();
-      setRes(data);
+      getData(setRes);
     };
 
-    getTasks(); // Call the getTasks function
+    getTasks();
   }, []);
 
   return (
