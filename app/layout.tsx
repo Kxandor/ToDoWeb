@@ -17,14 +17,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${inter.className}bg-white`}>
+    <html lang="en" className="">
+      <body className={`${inter.className}bg-white `}>
         <div className="flex bg-gray-100">
           <Suspense>
             <SideBar />
           </Suspense>
 
-          <main className="flex-1 p-4 ">
+          <main className="flex-1 p-4 dark:bg-slate-800 dark:text-white ">
             <TaskCreateHeader />
             {children}
           </main>

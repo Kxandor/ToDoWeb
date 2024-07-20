@@ -37,12 +37,13 @@ const CreateTaskForm = (props: Props) => {
 
     postData(newTask);
     router.push("/");
-    console.log(newTask); // This will log the correct task
+    console.log(newTask);
   };
 
   return (
     <div>
       <CreateEditForm
+        name="Create"
         label={label}
         setLabel={setLabel}
         underLabel={underLabel}
@@ -54,7 +55,6 @@ const CreateTaskForm = (props: Props) => {
         setPriority={setPriority}
         priority={priority}
         handleSubmit={handleSubmit}
-        isEditing
       />
     </div>
   );

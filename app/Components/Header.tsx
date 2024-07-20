@@ -6,10 +6,9 @@ import { useRouter } from "next/navigation";
 interface HeaderProps {
   title: string;
   subtitle: string;
-  canCreateTask: boolean;
 }
 
-const Header = ({ title, subtitle, canCreateTask }: HeaderProps) => {
+const Header = ({ title, subtitle }: HeaderProps) => {
   const router = useRouter();
   return (
     <div className="flex-col pt-8 ">

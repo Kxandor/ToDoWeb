@@ -4,8 +4,9 @@ import { IoBag } from "react-icons/io5";
 import { task } from "../types";
 import { deleteTask } from "../apis/deleteTask";
 import { markTaskComplete } from "../apis/markTaskComplete";
-import { useRouter } from "next/navigation"; // Import from next/router
+import { useRouter } from "next/navigation";
 import { useState } from "react";
+
 interface TaskCardProps {
   task: task;
   setTasks?: any;
@@ -18,7 +19,7 @@ const TaskCard = ({ task, tasks, setTasks, actions }: TaskCardProps) => {
   const [style, setStyle] = useState<boolean>(false);
 
   return (
-    <div className="rounded-xl shadow-sm bg-white w-60 p-4 hover:border-2 hover:border-blue-500">
+    <div className="rounded-xl shadow-sm bg-white w-60 p-4 hover:border-2 hover:border-blue-500 dark:bg-slate-800 dark:text-white dark:border-whtie dark:border-2">
       <div className="flex gap-2 ">
         <div className="text-[10px] flex items-center px-1 border-2 bg-blue-500 text-white ">
           {task.tag}
@@ -41,20 +42,28 @@ const TaskCard = ({ task, tasks, setTasks, actions }: TaskCardProps) => {
       {actions ? (
         <div className="flex justify-between py-2 text-sm">
           <div>
-            <button onClick={() => router.push(`/editTask/${task.id}`)}>
+            <button
+              key={`edit-${task.id}`}
+              onClick={() => router.push(`/editTask/${task.id}`)}
+            >
               Edit
             </button>
           </div>
           <div>
-            <button onClick={() => deleteTask(task.id, setTasks, tasks)}>
+            <button
+              key={`delete-${task.id}`}
+              onClick={() => deleteTask(task.id, setTasks, tasks)}
+            >
               Delete
             </button>
           </div>
           <div>
             <button
+              key={`complete-${task.id}`}
               onClick={() => {
                 markTaskComplete(task.id);
-                setTasks([{ ...tasks, task }]);
+                setTasks([{ ...tasks, task: (task.completed = true) }]);
+                console.log(task);
               }}
             >
               {task.completed ? <a>completed</a> : <a>complete</a>}

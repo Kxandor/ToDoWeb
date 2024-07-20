@@ -11,13 +11,11 @@ interface CreateEditFormProps {
   setLocation: React.Dispatch<React.SetStateAction<string>>;
   priority: string;
   setPriority: React.Dispatch<React.SetStateAction<string>>;
-
-  isEditing: boolean;
   handleSubmit: any;
+  name: string;
 }
 
 const CreateEditForm = ({
-  isEditing,
   handleSubmit,
   label,
   setLabel,
@@ -29,13 +27,14 @@ const CreateEditForm = ({
   setLocation,
   priority,
   setPriority,
+  name,
 }: CreateEditFormProps) => {
   return (
     <div className="pl-12 max-md:w-120 pt-12">
       <div>
         <form onSubmit={(e) => handleSubmit(e)}>
           <div className="pt-8 text-3xl font-bold text-blue-500">
-            {isEditing ? <p>Edit Task</p> : <p>Create Task</p>}
+            <p>{name} task</p>
           </div>
           <div>
             <div className="pt-8 md:flex gap-12">
@@ -44,7 +43,7 @@ const CreateEditForm = ({
                   <div className="pr-14">Task name</div>
                   <div>
                     <input
-                      className="rounded-md shadow-md focus:border-blue-500"
+                      className="rounded-md shadow-md dark:text-black focus:border-blue-500"
                       value={label}
                       onChange={(e) => setLabel(e.target.value)}
                     />
@@ -53,7 +52,7 @@ const CreateEditForm = ({
                 <div className="flex mb-2">
                   <div className="pr-[18px]">Task description</div>
                   <input
-                    className="rounded-md shadow-md"
+                    className="rounded-md shadow-md dark:text-black"
                     value={underLabel}
                     onChange={(e) => setUnderLabel(e.target.value)}
                   />
@@ -61,7 +60,7 @@ const CreateEditForm = ({
                 <div className="flex mb-2">
                   <div className="pr-[80px]">Priority</div>
                   <select
-                    className="rounded-md shadow-md w-full"
+                    className="rounded-md shadow-md w-full dark:text-black"
                     value={priority}
                     onChange={(e) => setPriority(e.target.value)}
                   >
@@ -75,7 +74,7 @@ const CreateEditForm = ({
                 <div className="flex mb-2 ">
                   <div className="md:pr-14 pr-[107px] ">Tag</div>
                   <select
-                    className="rounded-md shadow-md w-full"
+                    className="rounded-md shadow-md w-full dark:text-black"
                     value={tag}
                     onChange={(e) => setTag(e.target.value)}
                   >
@@ -87,17 +86,17 @@ const CreateEditForm = ({
                   </select>
                 </div>
                 <div className="flex mb-2">
-                  <div className="md:pr-[21px] pr-[70px]">Location</div>
+                  <div className="md:pr-[21px] pr-[70px] ">Location</div>
                   <input
-                    className="rounded-md shadow-md"
+                    className="rounded-md shadow-md dark:text-black"
                     value={location}
                     onChange={(e) => setLocation(e.target.value)}
                   />
                 </div>
 
                 <div className="flex justify-center w-full md:w-full bg-blue-500 hover:shadow-xl text-white hover:cursor-pointer rounded-xl">
-                  <div>
-                    <input type="submit"></input>
+                  <div className="w-full">
+                    <input type="submit" className="w-full"></input>
                   </div>
                 </div>
               </div>

@@ -5,28 +5,18 @@ import { getData } from "../apis/getData";
 import { task } from "../types";
 import { markTaskComplete } from "../apis/markTaskComplete";
 
-interface Props {
-  tasks: any;
+interface AllTasksProps {
+  tasks: [];
   setTasks: any;
 }
 
-type getData = {
-  id: number;
-  createdAt: string;
-  tag: string;
-  priority: boolean;
-  taskName: string;
-  taskDescription: string;
-  location: string;
-};
-
-const AllTasks = ({ tasks, setTasks }: Props) => {
+const AllTasks = ({ tasks, setTasks }: AllTasksProps) => {
   return (
-    <div className="mt-12">
+    <div className="mt-12 dark:">
       <div>
         <div>
           <h1
-            className="font-bold text-black text-2xl"
+            className="font-bold text-blue-500 text-2xl"
             onClick={() => console.log(tasks)}
           >
             All your tasks

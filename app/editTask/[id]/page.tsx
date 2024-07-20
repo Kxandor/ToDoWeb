@@ -66,7 +66,7 @@ const CreateTaskForm = ({ params }: { params: { id: string } }) => {
         setPriority={setPriority}
         priority={priority}
         handleSubmit={handleSubmit}
-        isEditing
+        name="Edit"
       />
     </div>
   );

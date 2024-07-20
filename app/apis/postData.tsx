@@ -1,4 +1,4 @@
-export const postData = async (data: any) => {
+export const postData = async (data: {}) => {
   try {
     const res = await fetch(
       "https://66982bc302f3150fb67042ee.mockapi.io/taskApi/tasks",
