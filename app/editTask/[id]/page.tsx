@@ -1,9 +1,9 @@
 "use client";
 import React, { FormEvent, useEffect, useState } from "react";
-import { postData } from "../apis/postData";
-import { getData } from "../apis/getData";
 import { useRouter } from "next/navigation";
-import CreateEditForm from "../Components/CreateEditForm";
+import { updateDatabase } from "@/app/apis/updateDatabase";
+import { getTaskById } from "@/app/apis/getTaskById";
+import CreateEditForm from "@/app/Components/CreateEditForm";
 type Props = {};
 type getData = {
   id: number;
@@ -15,7 +15,7 @@ type getData = {
   location: string;
 };
 
-const CreateTaskForm = (props: Props) => {
+const CreateTaskForm = ({ params }: { params: { id: string } }) => {
   const router = useRouter();
 
   const [label, setLabel] = useState<string>("");
@@ -25,19 +25,31 @@ const CreateTaskForm = (props: Props) => {
   const [priority, setPriority] = useState<string>("");
   const [time, setTime] = useState<string>("");
 
+  useEffect(() => {
+    if (Number(params.id)) {
+      getTaskById(Number(params.id)).then((task) => {
+        setLabel(task.taskName);
+        setUnderLabel(task.taskDescription);
+        setTag(task.tag);
+        setLocation(task.location);
+        setPriority(task.priority ? "true" : "false");
+      });
+    }
+  }, [Number(params.id)]);
+
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     const newTask = {
       taskName: label,
       tag: tag,
-      priority: priority,
+      priority: priority === "true",
       taskDescription: underLabel,
       location: location,
     };
 
-    postData(newTask);
-    router.push("/");
-    console.log(newTask); // This will log the correct task
+    updateDatabase(Number(params.id), newTask).then(() => {
+      router.push("/");
+    });
   };
 
   return (

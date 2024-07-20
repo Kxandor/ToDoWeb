@@ -1,17 +1,22 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { getData } from "../apis/getData";
-import { task } from "../types";
+import { getFilteredTasks } from "../apis/getFilteredTasks";
 import TaskCard from "../Components/TaskCard";
+import { task } from "../types";
 
 type Props = {};
 
 const Page = (props: Props) => {
-  const [res, setRes] = useState([]);
+  const [result, setResult] = useState([]);
 
   useEffect(() => {
     const getTasks = async () => {
-      getData(setRes);
+      try {
+        const tasks = await getFilteredTasks("priority", "true");
+        setResult(tasks);
+      } catch (error) {
+        console.error("Error fetching tasks:", error);
+      }
     };
 
     getTasks();
@@ -21,20 +26,15 @@ const Page = (props: Props) => {
     <div className="mt-12 h-screen pl-16">
       <div>
         <div>
-          <h1
-            className="font-bold  text-2xl text-blue-500"
-            onClick={() => console.log(res)}
-          >
-            All your not done tasks
+          <h1 className="font-bold  text-2xl text-blue-500">
+            All your high priority tasks
           </h1>
         </div>
         <div className="flex-grow py-4">
           <div className="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-6 gap-4">
-            {res?.map((task: task) => {
-              if (task.completed === false) {
+            {result?.map((task: task) => {
+              {
                 return <TaskCard key={task.id} task={task} />;
-              } else {
-                return null;
               }
             })}
           </div>

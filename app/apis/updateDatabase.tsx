@@ -1,23 +1,31 @@
 export const updateDatabase = async (
   id: number,
-  type: string,
-  value: boolean | string
+  updatedTask: {
+    taskName: string;
+    taskDescription: string;
+    tag: string;
+    priority: boolean;
+    location: string;
+  }
 ) => {
-  fetch(`https://66982bc302f3150fb67042ee.mockapi.io/tasks/${id}`, {
-    method: "PUT", // or PATCH
-    headers: { "content-type": "application/json" },
-    body: JSON.stringify({ type: value }),
-  })
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
+  try {
+    const res = await fetch(
+      `https://66982bc302f3150fb67042ee.mockapi.io/taskApi/tasks/${id}`,
+      {
+        method: "PUT", // or PATCH
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(updatedTask),
       }
-      // handle error
-    })
-    .then((task) => {
-      // Do something with updated task
-    })
-    .catch((error) => {
-      // handle error
-    });
+    );
+
+    if (!res.ok) {
+      throw new Error("Failed to update task");
+    }
+
+    const task = await res.json();
+    return task;
+  } catch (error) {
+    console.error("An error occurred while updating the task", error);
+    throw error;
+  }
 };

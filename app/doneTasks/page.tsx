@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import { getData } from "../apis/getData";
 import { task } from "../types";
 import TaskCard from "../Components/TaskCard";
-import TaskCardv1 from "../Components/TaskCardv1";
 type Props = {};
 
 const Page = (props: Props) => {
@@ -18,7 +17,7 @@ const Page = (props: Props) => {
   }, [res.length]);
 
   return (
-    <div className="mt-12 pl-16">
+    <div className="mt-12 h-screen pl-16">
       <div>
         <div>
           <h1
@@ -32,7 +31,7 @@ const Page = (props: Props) => {
           <div className="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-6 gap-4">
             {res?.map((task: task) => {
               if (task.completed === true) {
-                return <TaskCardv1 key={task.id} task={task} />;
+                return <TaskCard key={task.id} task={task} />;
               } else {
                 return null;
               }

@@ -41,6 +41,7 @@ const AllTasks = ({ tasks, setTasks }: Props) => {
                   task={task}
                   tasks={tasks}
                   setTasks={setTasks}
+                  actions
                 />
               );
             })}
