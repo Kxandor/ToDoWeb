@@ -46,6 +46,7 @@ const CreateEditForm = ({
                       className="rounded-md shadow-md dark:text-black focus:border-blue-500"
                       value={label}
                       onChange={(e) => setLabel(e.target.value)}
+                      required
                     />
                   </div>
                 </div>
@@ -55,6 +56,7 @@ const CreateEditForm = ({
                     className="rounded-md shadow-md dark:text-black"
                     value={underLabel}
                     onChange={(e) => setUnderLabel(e.target.value)}
+                    required
                   />
                 </div>
                 <div className="flex mb-2">
@@ -63,6 +65,7 @@ const CreateEditForm = ({
                     className="rounded-md shadow-md w-full dark:text-black"
                     value={priority}
                     onChange={(e) => setPriority(e.target.value)}
+                    required
                   >
                     <option value=""></option>
                     <option value="true">High</option>
@@ -77,6 +80,7 @@ const CreateEditForm = ({
                     className="rounded-md shadow-md w-full dark:text-black"
                     value={tag}
                     onChange={(e) => setTag(e.target.value)}
+                    required
                   >
                     <option value=""></option>
                     <option value="Work">Work</option>
@@ -91,6 +95,7 @@ const CreateEditForm = ({
                     className="rounded-md shadow-md dark:text-black"
                     value={location}
                     onChange={(e) => setLocation(e.target.value)}
+                    required
                   />
                 </div>
 

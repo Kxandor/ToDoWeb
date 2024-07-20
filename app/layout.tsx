@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import SideBar from "./Components/SideBar/SideBar";
-
 import { Suspense } from "react";
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,7 +24,7 @@ export default function RootLayout({
           </Suspense>
 
           <main className="flex-1 p-4 dark:bg-slate-800 dark:text-white ">
-            {children}
+            <Suspense>{children}</Suspense>
           </main>
         </div>
       </body>
