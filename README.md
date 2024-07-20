@@ -8,7 +8,6 @@ First, run the development server:
 ```bas
 
 npm i next
-than
 npm run dev
 # or
 yarn dev
