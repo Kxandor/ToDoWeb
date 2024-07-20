@@ -24,7 +24,7 @@ export default function RootLayout({
           </Suspense>
 
           <main className="flex-1 p-4 dark:bg-slate-800 dark:text-white ">
-            <Suspense>{children}</Suspense>
+            {children}
           </main>
         </div>
       </body>
